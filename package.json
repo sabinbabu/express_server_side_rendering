@@ -1,0 +1,16 @@
+{
+  "name": "node_basics",
+  "version": "1.0.0",
+  "description": "This is node basics demo",
+  "main": "server.js",
+  "author": "sabinacharya",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
