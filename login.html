@@ -10,42 +10,76 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>Homely</title>
   </head>
   <body>
-    <form
-      action=""
-      method="post"
-      enctype=""
-      class="m-auto w-50 border shadow-lg p-3 mt-5"
-    >
-      <h1>Login user</h1>
-      <hr />
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input
-          type="email"
-          name="email"
-          class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-        />
-        <div id="emailHelp" class="form-text">
-          We'll never share your email with anyone else.
+    <div class="row vh-100 overflow-hidden">
+      <div class="col bg-info">
+        <h1 class="text-white ms-4">Homely.</h1>
+        <div class="h-50 d-flex align-items-center">
+          <div class="card ms-4 border-0" style="width: 22rem">
+            <div class="card-body bg-info text-white">
+              <p class="h4">Select your destination,</p>
+              <p class="h4">Select the date and time,</p>
+              <p class="h4">Pay through the application</p>
+              <p class="h4">And enjoy your holiday</p>
+              <hr />
+            </div>
+          </div>
+          <img
+            src="https://i.postimg.cc/4N7y1nDm/download.png"
+            class="card-img-top h-50 w-50 fixed-bottom"
+            alt="..."
+          />
         </div>
       </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input
-          type="password"
-          name="password"
-          class="form-control"
-          id="exampleInputPassword1"
-        />
-      </div>
 
-      <button type="submit" class="btn btn-primary">Login</button>
-      <div>No account with us? <a href="/signup">Sign Up</a></div>
-    </form>
+      <div
+        class="col vh-100 text-center d-flex justify-content-center align-items-center flex-column"
+      >
+        <h2>Welcome Back!</h2>
+        <p>Enter your details</p>
+        <form action="" method="post" enctype="" class="w-50 text-start">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="example@gmail.com"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+            <a class="pe-auto form-text text-info text-decoration-none" href="#"
+              >Forget Password?</a
+            >
+          </div>
+
+          <button type="submit" class="btn btn-info w-100 mt-4">Login</button>
+          <div class="mt-1">
+            Don't have account?
+            <a
+              href="/signup"
+              class="pe-auto form-text text-info text-decoration-none"
+              >Sign Up for free</a
+            >
+          </div>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

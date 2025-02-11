@@ -1,5 +1,5 @@
 //console.log("hello server");
-import express, { Router } from "express";
+import express from "express";
 
 // Node core modules
 // directory path of our system
@@ -19,9 +19,7 @@ const PORT = 3000;
 app.get("/", (req, res) => {
   console.log("Request", req);
   //   Send a html code as response
-  res.send(
-    "<div><a href='/signup'>Sign Up</a> <a href='/login'>Login</a><hr /><h1 style='color: red'>Node JS Login System</h1></div>"
-  );
+  res.sendFile(_dirname + "/login.html");
 });
 
 // GET
