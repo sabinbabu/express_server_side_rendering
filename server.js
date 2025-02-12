@@ -6,6 +6,7 @@ import express from "express";
 import path from "path";
 // file system
 import fs from "fs";
+import { error } from "console";
 
 const _dirname = path.resolve();
 
@@ -44,7 +45,7 @@ app.get("/forgotpassword", (req, res) => {
   res.sendFile(_dirname + "/forgotPassword.html");
 });
 // Middleware
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // POST
 
@@ -80,6 +81,32 @@ app.post("/login", (req, res) => {
     users.includes(userRecords)
       ? res.send("Login successfully")
       : res.send('Invalid Credentials, <a href="/login">Login</a>');
+  });
+});
+
+// forgot password end point |
+app.post("/forgotpassword", (req, res) => {
+  const { email, password } = req.body;
+  const userRecords = email + "|" + password;
+  const fileName = _dirname + "/userList.csv";
+
+  fs.readFile(fileName, (error, data) => {
+    if (error) return res.send(error.message);
+    const users = data.toString();
+    // removing previous record
+    const userRequest = users
+      .split("\n")
+      .filter((item) => !item.includes(email));
+    // adding replaced record
+    const newRecord = [...userRequest, userRecords];
+    // converting array to string
+    const newDataString = newRecord.join("\n");
+
+    users
+      ? fs.writeFile(fileName, newDataString, (error) => {
+          error ? console.log(error) : res.redirect("/login");
+        })
+      : res.send("<h1>User not found</h1>");
   });
 });
 
