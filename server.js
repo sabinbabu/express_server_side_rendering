@@ -39,6 +39,10 @@ app.get("/sabin", (req, res) => {
   res.send("<h1>Sabin Acharya</h1> \n <a href='sabinacharya.com>Sabin</a>");
 });
 
+// forgot password
+app.get("/forgotpassword", (req, res) => {
+  res.sendFile(_dirname + "/forgotPassword.html");
+});
 // Middleware
 app.use(express.urlencoded());
 
