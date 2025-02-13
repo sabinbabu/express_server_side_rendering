@@ -93,20 +93,25 @@ app.post("/forgotpassword", (req, res) => {
   fs.readFile(fileName, (error, data) => {
     if (error) return res.send(error.message);
     const users = data.toString();
-    // removing previous record
-    const userRequest = users
-      .split("\n")
-      .filter((item) => !item.includes(email));
-    // adding replaced record
-    const newRecord = [...userRequest, userRecords];
-    // converting array to string
-    const newDataString = newRecord.join("\n");
 
-    users
-      ? fs.writeFile(fileName, newDataString, (error) => {
-          error ? console.log(error) : res.redirect("/login");
-        })
-      : res.send("<h1>User not found</h1>");
+    if (users.includes(email)) {
+      // removing previous record
+      const userRequest = users
+        .split("\n")
+        .filter((item) => !item.includes(email));
+      // adding replaced record
+      const newRecord = [...userRequest, userRecords];
+      // converting array to string
+      const newDataString = newRecord.join("\n");
+
+      fs.writeFile(fileName, newDataString, (error) => {
+        error
+          ? res.send(error.message)
+          : res.sendFile(_dirname + "/passwordChangeSuccess.html");
+      });
+    } else {
+      res.sendFile(_dirname + "/passwordChangeFailure.html");
+    }
   });
 });
 
