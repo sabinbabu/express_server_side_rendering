@@ -17,9 +17,8 @@ const PORT = 3000;
 
 // Index route
 app.get("/", (req, res) => {
-  console.log("Request", req);
   //   Send a html code as response
-  res.sendFile(_dirname + "/login.html");
+  res.redirect("/login");
 });
 
 // GET
@@ -76,16 +75,20 @@ app.post("/login", (req, res) => {
   const userRecords = email + "|" + password;
   const fileName = _dirname + "/userList.csv";
 
-  fs.readFile(fileName, (error, data) => {
-    if (error) {
-      return res.send(error.message);
-    }
+  if (email && password) {
+    fs.readFile(fileName, (error, data) => {
+      if (error) {
+        return res.send(error.message);
+      }
 
-    const users = data.toString();
-    users.split("\n").includes(userRecords)
-      ? res.send("Login successfully")
-      : res.sendFile(_dirname + "/invalidPassword.html");
-  });
+      const users = data.toString();
+      users.split("\n").includes(userRecords)
+        ? res.send("Login successfully")
+        : res.sendFile(_dirname + "/invalidPassword.html");
+    });
+  } else {
+    res.sendFile(_dirname + "/invalidPassword.html");
+  }
 });
 
 // forgot password end point |
