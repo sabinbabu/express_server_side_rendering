@@ -65,8 +65,8 @@
     </nav>
     <!-- main -->
     <div class="container mt-3">
-      <div>
-        <p id="username"></p>
+      <div style="height: 10rem" class="d-flex align-items-center">
+        <p>Hello, <span id="username" class="text-info h1"></span></p>
       </div>
       <!-- Three columns of text  -->
       <div class="row">
@@ -224,7 +224,7 @@
       const currentUserEmail = currentUrl.split("/")[4];
       const currentUserName = currentUserEmail.split("@")[0];
       const usernameEl = document.getElementById("username");
-      usernameEl.innerText = `Hello, ${currentUserName}`;
+      usernameEl.innerText = `${currentUserName}`;
     </script>
   </body>
 </html>
