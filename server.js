@@ -126,7 +126,7 @@ app.post("/forgotpassword", (req, res) => {
         .split("\n")
         .filter((item) => !item.includes(email));
       // adding replaced record
-      const newRecord = [...userRequest, userRecords];
+      const newRecord = [userRecords, ...userRequest];
       // converting array to string
       const newDataString = newRecord.join("\n");
 

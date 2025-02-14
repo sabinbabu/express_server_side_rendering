@@ -1,4 +1,4 @@
-# Login Server
+# Login Server (Server Side Rendering)
 
 This is a simple Node.js project built using Express.js. It is a web server that listens to request, processes them and responds them accordingly.
 
