@@ -28,12 +28,12 @@ app.get("/", (req, res) => {
 // Sign up Route
 // res: Send Whole HTML File | Server Side Rendering
 app.get("/signup", (req, res) => {
-  res.sendFile(`${_dirname}/signup.html`);
+  res.sendFile(`${_dirname}/pages/signup.html`);
 });
 
 // Login Route
 app.get("/login", (req, res) => {
-  res.sendFile(`${_dirname}/login.html`);
+  res.sendFile(`${_dirname}/pages/login.html`);
 });
 
 // send name
@@ -43,13 +43,14 @@ app.get("/sabin", (req, res) => {
 
 // forgot password
 app.get("/forgotpassword", (req, res) => {
-  res.sendFile(_dirname + "/forgotPassword.html");
+  res.sendFile(_dirname + "/pages/forgotPassword.html");
 });
 
 // homepage
 app.get("/users/:name", (req, res) => {
   const { name } = req.params;
-  if (loggedUser === name) return res.sendFile(_dirname + "/homepage.html");
+  if (loggedUser === name)
+    return res.sendFile(_dirname + "/pages/homepage.html");
   res.redirect("/login");
 });
 
@@ -61,7 +62,7 @@ app.get("/logout", (req, res) => {
 
 // redirect all unmatched routes
 app.get("*", (req, res) => {
-  res.sendFile(_dirname + "/wrongurl.html");
+  res.sendFile(_dirname + "/pages/wrongurl.html");
 });
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -81,9 +82,9 @@ app.post("/signup", (req, res) => {
     fs.appendFile(fileName, userRecords, (error) => {
       error ? console.log(error) : console.log("Data Saved Successfully");
     });
-    res.sendFile(_dirname + "/passwordChangeSuccess.html");
+    res.sendFile(_dirname + "/pages/passwordChangeSuccess.html");
   } else {
-    res.sendFile(_dirname + "/signupError.html");
+    res.sendFile(_dirname + "/pages/signupError.html");
   }
 });
 
@@ -102,10 +103,10 @@ app.post("/login", (req, res) => {
       const users = data.toString();
       users.split("\n").includes(userRecords)
         ? (res.redirect("/users/" + email), (loggedUser = email))
-        : res.sendFile(_dirname + "/invalidPassword.html");
+        : res.sendFile(_dirname + "/pages/invalidPassword.html");
     });
   } else {
-    res.sendFile(_dirname + "/invalidPassword.html");
+    res.sendFile(_dirname + "/pages/invalidPassword.html");
   }
 });
 
@@ -132,10 +133,10 @@ app.post("/forgotpassword", (req, res) => {
       fs.writeFile(fileName, newDataString, (error) => {
         error
           ? res.send(error.message)
-          : res.sendFile(_dirname + "/passwordChangeSuccess.html");
+          : res.sendFile(_dirname + "/pages/passwordChangeSuccess.html");
       });
     } else {
-      res.sendFile(_dirname + "/passwordChangeFailure.html");
+      res.sendFile(_dirname + "/pages/passwordChangeFailure.html");
     }
   });
 });
