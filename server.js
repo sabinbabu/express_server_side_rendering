@@ -15,6 +15,9 @@ const app = express();
 // Define a port
 const PORT = 3000;
 
+// current logged in user
+let loggedUser = "";
+
 // Index route
 app.get("/", (req, res) => {
   //   Send a html code as response
@@ -43,9 +46,17 @@ app.get("/forgotpassword", (req, res) => {
   res.sendFile(_dirname + "/forgotPassword.html");
 });
 
+// homepage
 app.get("/users/:name", (req, res) => {
   const { name } = req.params;
-  res.sendFile(_dirname + "/homepage.html");
+  if (loggedUser === name) return res.sendFile(_dirname + "/homepage.html");
+  res.redirect("/login");
+});
+
+// logout
+app.get("/logout", (req, res) => {
+  loggedUser = "";
+  res.redirect("login");
 });
 
 // redirect all unmatched routes
@@ -90,7 +101,7 @@ app.post("/login", (req, res) => {
 
       const users = data.toString();
       users.split("\n").includes(userRecords)
-        ? res.redirect("/users/" + email)
+        ? (res.redirect("/users/" + email), (loggedUser = email))
         : res.sendFile(_dirname + "/invalidPassword.html");
     });
   } else {
