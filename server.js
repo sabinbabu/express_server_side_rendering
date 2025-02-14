@@ -55,18 +55,20 @@ app.use(express.urlencoded({ extended: true }));
 // Sign up  post route | collect data from sign up form submission
 // res: Send Whole HTML File | Server Side Rendering
 app.post("/signup", (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   //   store email in a file which is fake db for us
   const userRecords = email + "|" + password + "\n";
   const fileName = _dirname + "/userList.csv";
-  //   write user record to file
-  fs.appendFile(fileName, userRecords, (error) => {
-    error ? console.log(error) : console.log("Data Saved Successfully");
-  });
 
-  res.send(
-    "<p>Thank you for registration, please <a href='/login'>Login</a></p>"
-  );
+  if (name && email && password) {
+    //   write user record to file
+    fs.appendFile(fileName, userRecords, (error) => {
+      error ? console.log(error) : console.log("Data Saved Successfully");
+    });
+    res.sendFile(_dirname + "/passwordChangeSuccess.html");
+  } else {
+    res.sendFile(_dirname + "/signupError.html");
+  }
 });
 
 // Login end point | verify if the user is valid or not
