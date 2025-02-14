@@ -43,6 +43,11 @@ app.get("/forgotpassword", (req, res) => {
   res.sendFile(_dirname + "/forgotPassword.html");
 });
 
+app.get("/users/:name", (req, res) => {
+  const { name } = req.params;
+  res.sendFile(_dirname + "/homepage.html");
+});
+
 // redirect all unmatched routes
 app.get("*", (req, res) => {
   res.sendFile(_dirname + "/wrongurl.html");
@@ -85,7 +90,7 @@ app.post("/login", (req, res) => {
 
       const users = data.toString();
       users.split("\n").includes(userRecords)
-        ? res.send("Login successfully")
+        ? res.redirect("/users/" + email)
         : res.sendFile(_dirname + "/invalidPassword.html");
     });
   } else {
