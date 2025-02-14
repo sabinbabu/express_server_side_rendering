@@ -80,7 +80,7 @@ app.post("/login", (req, res) => {
     const users = data.toString();
     users.split("\n").includes(userRecords)
       ? res.send("Login successfully")
-      : res.send('Invalid Credentials, <a href="/login">Login</a>');
+      : res.sendFile(_dirname + "/invalidPassword.html");
   });
 });
 
