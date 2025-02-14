@@ -6,7 +6,6 @@ import express from "express";
 import path from "path";
 // file system
 import fs from "fs";
-import { error } from "console";
 
 const _dirname = path.resolve();
 
@@ -43,6 +42,11 @@ app.get("/sabin", (req, res) => {
 // forgot password
 app.get("/forgotpassword", (req, res) => {
   res.sendFile(_dirname + "/forgotPassword.html");
+});
+
+// redirect all unmatched routes
+app.get("*", (req, res) => {
+  res.sendFile(_dirname + "/wrongurl.html");
 });
 // Middleware
 app.use(express.urlencoded({ extended: true }));
